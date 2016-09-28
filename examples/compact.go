@@ -33,5 +33,7 @@ func main() {
 		panic(err)
 	}
 
+	ld.LDS2015(doc)
+
 	ld.PrintDocument("JSON-LD compation succeeded", compactedDoc)
 }
