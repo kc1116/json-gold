@@ -4,6 +4,7 @@ package main
 
 import (
     "github.com/kc1116/json-gold/lds"
+    "github.com/kc1116/json-gold/ld"
 )
 
 
@@ -11,14 +12,6 @@ func main() {
 	doc := map[string]interface{}{
         "@context":"https://w3id.org/identity/v1",
 		"title": "Sample",
-        "signature": map[string]interface{}{
-			"@type": "LinkedDataSignature2015",
-            "creator": "http://example.com/i/pat/keys/5",
-            "created": "2011-09-23T20:21:34Z",
-            "domain": "github.com/kc1116",
-            "nonce": "2bbgh3dgjg2302d-d2b3gi423d42",
-            "signatureValue": "OGQzNGVkMzVm4NTIyZTkZDYNmExMgoYzI43Q3ODIyOWM32NjI=",
-		},
 	}
 
     opts := lds.SignatureOptions{
@@ -29,7 +22,7 @@ func main() {
         Nonce: "fdhfakdf89fyd9afg37798",
     }
 
-    var privk = "-----BEGIN RSA PRIVATE KEY-----"+
+    var privk = "-----BEGIN RSA PRIVATE KEY-----\n"+
 "MIICWwIBAAKBgGLOw75pbognskzSL6CvjDXbq94wnGk0a58tLsp+sG6kVt4T/lZq"+
 "DPmSjlrrBF9sXnC7O6q6hGDyjWIDxAyE0OFC9xqrCb9klxvEHDV1joTV6uxJKXSP"+
 "x/241zAsq7mZPM3HqodQzJUcNDENYbeXuP/Pi6UXoDsw8fPQkTJXkFlXAgMBAAEC"+
@@ -43,7 +36,11 @@ func main() {
 "PG23UKlfOwQgM9seR7O3ZDdxgEmOEbJGbMCyBvVAuXPdJ8V4XcvrYbzTaiIn1fRi"+
 "mos0e9vBZXFl418z0QJANQKSXyIoHOL2deSafKmPhWlhY2zlqOnmiKJDqzuV2Enh"+
 "m57XtNSt7iYq4OI+V8J4dPCLvkllPmn7npbZxun2Hw=="+
-"-----END RSA PRIVATE KEY-----"
-	lds.S2015(doc, opts, privk)
+"\n-----END RSA PRIVATE KEY-----"
+	signedDoc := lds.S2015(doc, opts, privk)
+
+    ld.PrintDocument("Here lies the unsigened document: ", doc)
+    ld.PrintDocument("Here lies the new signed document: ", signedDoc)
+
 
 }
