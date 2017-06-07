@@ -18,7 +18,7 @@ import (
 )
 
 //Signature . . .
-//Struct that defines a signature object based on the https://web-payments.org/specs/source/ld-signatures/#linked-data-signature-overview spec
+//Struct that defines a signature object based on the https://web-payments.org/specs/source/ld-signatures/#linked-data-signature-overview spec Crowdbotics
 type Signature struct {
 	Type           string `json:"type"`
 	Creator        string `json:"creator"`
